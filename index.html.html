@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Piyush Makhija – Resume</title>
+  <!-- Google Fonts: Poppins for headings, Lora for body text -->
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;800&family=DM+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <!-- All my CSS is in this one file -->
+  <style>
+/* ---------- 1. COLOR PALETTE AND FONTS ----------
+   Stored as variables so I can change them in one place. */
+:root {
+  --paper: #faf7f0;   /* page background */
+  --ink: #1b1d3a;     /* main text */
+  --muted: #5b5d7a;   /* softer grey text */
+  --route: #14573f;   /* teal: line, links, dates */
+  --stop: #a9dcc6;
+  --soft: #a9dcc6;    /* mint for boxes */
+  --soft-line: #5fb996;
+  --accent: #14573f;    /* yellow: dots and highlights */
+  --head: "Fraunces", Georgia, serif;
+  --body: "DM Sans", "Trebuchet MS", sans-serif;
+}
+
+/* ---------- 2. ELEMENT SELECTORS (style every tag of that type) ---------- */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 1.05rem/1.65 var(--body);
+}
+
+main {
+  max-width: 46rem;       /* keeps lines readable */
+  margin: 0 auto;         /* centers the content */
+  padding: 2rem 1.25rem 4rem;
+}
+
+h2 {
+  font: 700 1.5rem/1.2 var(--head);
+  margin: 3.5rem 0 1.5rem;
+}
+
+h3 { font: 700 1.2rem/1.3 var(--head); margin: 0.1rem 0 0.4rem; }
+h3 small { font: 400 1rem var(--body); color: var(--muted); }
+
+/* ---------- 3. NAVIGATION BAR (flexbox + positioning) ---------- */
+.navbar {
+  position: sticky;            /* stays at the top while scrolling */
+  top: 0;
+  z-index: 10;                 /* sits above other content */
+  display: flex;               /* flexbox: puts logo and links in a row */
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  padding: 0.8rem 1.25rem;
+  background: var(--ink);
+}
+
+.logo {
+  font: 800 1.1rem var(--head);
+  color: var(--stop);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;               /* links in a row */
+  gap: 1.2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-links a {
+  font: 600 0.9rem var(--head);
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav-links a:hover { color: var(--stop); }
+
+/* so headings are not hidden under the sticky bar when a link is clicked */
+section, header { scroll-margin-top: 4.5rem; }
+html { scroll-behavior: smooth; }
+
+/* ---------- 4. ID SELECTOR (one unique element: #top) ---------- */
+#top { padding-top: 2rem; }
+
+#top h1 {
+  font: 800 clamp(3rem, 13vw, 6rem)/0.9 var(--head);
+  letter-spacing: -0.04em;
+  margin: 0 0 1rem;
+}
+
+#top h1 span { display: block; color: var(--route); margin-left: 0.6em; }
+
+/* ---------- 5. CLASS SELECTORS (reusable styles) ---------- */
+.tagline { font-style: italic; margin: 0 0 1.25rem; }
+
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.2rem;
+  font: 400 0.95rem var(--head);
+}
+
+.contact a {
+  color: var(--ink);
+  text-decoration-color: var(--route);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
+}
+
+.contact a:hover { background: var(--stop); }
+
+.summary { max-width: 38rem; margin: 0; }
+
+.when { font: 600 0.9rem var(--head); color: var(--route); margin: 0; }
+.label { font: 600 0.8rem var(--head); color: var(--muted); margin: 0 0 0.6rem; }
+
+/* ---------- 6. PROJECT CARDS (flexbox) ---------- */
+.cards {
+  display: flex;
+  flex-wrap: wrap;             /* cards stack on small screens */
+  gap: 1.25rem;
+}
+
+.card {
+  flex: 1 1 18rem;             /* each card grows, minimum width 18rem */
+  background: #fff;
+  border: 2px solid var(--ink);
+  border-top: 6px solid var(--stop);
+  border-radius: 8px;
+  padding: 1.1rem 1.25rem;
+}
+
+/* hover effect: card lifts up a little when the mouse is on it */
+.card {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 6px 6px 0 var(--stop);
+}
+
+.card ul { margin: 0; padding-left: 1.1rem; }
+.card li { margin-bottom: 0.4rem; }
+
+/* ---------- 7. SKILL TAGS ---------- */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.tags li {
+  position: relative;
+  font: 600 0.95rem var(--head);
+  padding: 0.35rem 0.9rem 0.35rem 1.4rem;
+  background: #fff;
+  border: 2px solid var(--ink);
+  border-radius: 4px 14px 14px 4px;
+}
+
+/* small hole on the left of each tag */
+.tags li::before {
+  content: "";
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  margin-top: -4px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+}
+
+.tags li:nth-child(3n+1) { transform: rotate(-1.2deg); }
+.tags li:nth-child(3n+2) { transform: rotate(0.8deg); }
+
+/* ---------- 8. EDUCATION ROUTE (positioning) ---------- */
+.route {
+  position: relative;          /* the line and dots are positioned inside this */
+  margin: 0;
+  padding: 0 0 0 2.25rem;
+  list-style: none;
+}
+
+/* the vertical line */
+.route::before {
+  content: "";
+  position: absolute;
+  left: 0.55rem;
+  top: 0.6rem;
+  bottom: 0.6rem;
+  width: 4px;
+  background: var(--route);
+  border-radius: 2px;
+}
+
+.route li { position: relative; margin-bottom: 2rem; }
+
+/* one dot for each stop */
+.route li::before {
+  content: "";
+  position: absolute;
+  left: -2.1rem;
+  top: 0.45rem;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--stop);
+  border: 4px solid var(--ink);
+}
+
+/* ---------- CONTACT SECTION (flexbox) ---------- */
+#contact {
+  background: var(--ink);
+  color: #fff;
+  border-radius: 12px;
+  padding: 1.5rem 1.5rem 2rem;
+  margin-top: 3.5rem;
+}
+
+#contact h2 { margin-top: 0; color: var(--stop); }
+#contact p { margin: 0 0 1.25rem; }
+
+.contact-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact-list li {
+  flex: 1 1 14rem;
+  background: rgba(255, 255, 255, 0.08);
+  border-left: 4px solid var(--stop);
+  border-radius: 6px;
+  padding: 0.7rem 1rem;
+}
+
+.contact-list span {
+  display: block;
+  font: 600 0.8rem var(--head);
+  color: var(--stop);
+}
+
+.contact-list a { color: #fff; word-break: break-word; }
+
+.button {
+  display: inline-block;
+  margin-top: 1.25rem;
+  padding: 0.6rem 1.3rem;
+  background: var(--stop);
+  color: var(--ink);
+  font: 700 0.95rem var(--head);
+  border-radius: 999px;
+  text-decoration: none;
+}
+
+.button:hover { background: #fff; }
+
+/* ---------- SIMPLE TOUCHES (kept minimal) ---------- */
+
+/* one soft yellow highlighter strip under each section heading */
+h2 {
+  display: inline-block;
+  padding: 0 0.3rem;
+  background: linear-gradient(transparent 60%, var(--stop) 60%);
+}
+#contact h2 { background: none; }
+
+/* cards: plain, with a thin border and a yellow top line */
+.card {
+  border-width: 1px;
+  border-top: 5px solid var(--stop);
+  box-shadow: none;
+}
+.card:hover { transform: translateY(-3px); box-shadow: 0 6px 14px rgba(27, 29, 58, 0.12); }
+
+/* tags: straight, white, one style */
+.tags li { transform: none !important; }
+
+/* contact box: no extra border or shadow */
+#contact { border: none; box-shadow: none; }
+
+/* ---------- EDUCATION: badges, marks and a "now" dot ---------- */
+
+/* dates in the education route look like small badges */
+.route .when {
+  display: inline-block;
+  padding: 0.1rem 0.8rem;
+  margin-bottom: 0.3rem;
+  background: var(--ink);
+  color: #fff;
+  border-radius: 999px;
+  font-size: 0.8rem;
+}
+
+/* CFA is happening now, so its badge is yellow */
+.route li:first-child .when { background: var(--stop); color: var(--ink); }
+
+/* marks get the highlighter strip */
+.mark {
+  padding: 0 0.3rem;
+  background: linear-gradient(transparent 55%, var(--stop) 55%);
+}
+
+/* the CFA dot pulses to show it is still going on */
+@media (prefers-reduced-motion: no-preference) {
+  .route li:first-child::before { animation: pulse 1.8s infinite; }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 201, 60, 0.8); }
+    100% { box-shadow: 0 0 0 12px rgba(255, 201, 60, 0); }
+  }
+}
+
+/* ---------- ABOUT: pull-quote style ---------- */
+.summary {
+  font-size: 1.2rem;
+  max-width: 40rem;
+  border-left: 5px solid var(--stop);
+  padding-left: 1rem;
+}
+
+/* ---------- EDUCATION: staircase (flexbox) ---------- */
+.steps {
+  display: flex;
+  align-items: flex-end;       /* all steps sit on the same floor */
+  gap: 0.6rem;
+}
+
+.step {
+  flex: 1;
+  background: #fff;
+  border: 2px solid var(--ink);
+  border-top: 6px solid var(--stop);
+  border-radius: 8px 8px 0 0;
+  padding: 0.8rem 0.9rem;
+}
+
+.step p { margin: 0 0 0.5rem; font-size: 0.95rem; line-height: 1.4; }
+
+/* each step is taller than the one before */
+.step:nth-child(1) { min-height: 9rem; }
+.step:nth-child(2) { min-height: 12rem; }
+.step:nth-child(3) { min-height: 19rem; }
+.step:nth-child(4) { min-height: 23rem; }
+
+.step .big { font: 800 2.2rem/1 var(--head); margin: 0.2rem 0 0.4rem; }
+
+/* CFA is not finished yet, so it has a dashed border */
+.step-now { border-style: dashed; border-top: 6px solid var(--route); }
+
+/* on phones the steps stack and move to the right one by one */
+@media (max-width: 640px) {
+  .steps { flex-direction: column; align-items: stretch; }
+  .step { min-height: 0 !important; border-radius: 8px; }
+  .step:nth-child(2) { margin-left: 1.2rem; }
+  .step:nth-child(3) { margin-left: 2.4rem; }
+  .step:nth-child(4) { margin-left: 3.6rem; }
+}
+
+/* ---------- ABOUT: text on the left, "at a glance" box on the right ---------- */
+.about {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.about-text { flex: 2 1 20rem; }
+.about-text p { margin: 0 0 1rem; }
+.about-text .summary { margin-bottom: 1.25rem; }
+
+.glance {
+  flex: 1 1 14rem;
+  background: var(--ink);
+  color: #fff;
+  border-radius: 10px;
+  padding: 1.1rem 1.25rem;
+  border-top: 6px solid var(--stop);
+}
+
+.glance h3 { color: var(--stop); margin: 0 0 0.8rem; }
+.glance dl { margin: 0; }
+
+.glance dt {
+  font: 600 0.8rem var(--head);
+  color: var(--stop);
+  margin-top: 0.7rem;
+}
+
+.glance dd { margin: 0; font-size: 0.95rem; }
+
+/* ---------- EDUCATION: flip cards ---------- */
+.hint { font-size: 0.9rem; color: var(--muted); margin: -0.5rem 0 1rem; }
+
+.flip-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.flip {
+  flex: 1 1 11rem;
+  height: 15rem;
+  perspective: 900px;          /* gives the flip a 3D look */
+  outline: none;
+}
+
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+/* flip when the mouse is on it, or when tapped / focused */
+.flip:hover .flip-inner,
+.flip:focus .flip-inner { transform: rotateY(180deg); }
+
+.flip-front,
+.flip-back {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+  border-radius: 10px;
+  backface-visibility: hidden; /* hides the side facing away */
+}
+
+.flip-front {
+  background: var(--ink);
+  color: #fff;
+  border-top: 6px solid var(--stop);
+}
+
+.flip-front .when { color: var(--stop); }
+.flip-front .big { font: 800 2.4rem/1.1 var(--head); margin: 0.3rem 0 0; }
+.flip-front .small-big { font-size: 1.6rem; }
+
+.flip-back {
+  background: #fff;
+  border: 2px solid var(--ink);
+  transform: rotateY(180deg);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.flip-back p { margin: 0 0 0.6rem; }
+
+/* CFA is still going on, so its front has a dashed border */
+.flip-now .flip-front { border: 2px dashed var(--stop); border-top-width: 6px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .flip-inner { transition: none; }
+}
+
+/* ---------- SOFT LAVENDER COLORS for "At a glance" and the flip cards ---------- */
+.glance {
+  background: var(--soft);
+  color: var(--ink);
+  border-top-color: var(--soft-line);
+}
+.glance h3,
+.glance dt { color: var(--accent); }
+
+.flip-front {
+  background: var(--soft);
+  color: var(--ink);
+  border-top-color: var(--soft-line);
+}
+.flip-front .when { color: var(--accent); }
+.flip-back { border-color: var(--soft-line); }
+.flip-now .flip-front { border-color: var(--soft-line); border-top-width: 6px; }
+
+/* ---------- EDUCATION CARD FRONT: title, school and a small score ---------- */
+.flip-front { align-items: flex-start; }
+.flip-front .when { margin: 0; font-size: 0.8rem; }
+.flip-front .title { font: 800 1.5rem/1.2 var(--head); margin: 0.2rem 0 0.5rem; }
+.flip-front .school { margin: 0 0 0.3rem; font-size: 0.9rem; line-height: 1.35; }
+
+.pill {
+  display: inline-block;
+  margin-top: 0.4rem;
+  padding: 0.1rem 0.7rem;
+  background: #fff;
+  border: 1px solid var(--soft-line);
+  border-radius: 999px;
+  font: 600 0.8rem var(--head);
+}
+
+/* ---------- CONTACT: same mint color as the other boxes ---------- */
+#contact { background: var(--soft); color: var(--ink); }
+#contact h2 { color: var(--ink); }
+.contact-list li { background: rgba(255, 255, 255, 0.55); border-left-color: var(--accent); }
+.contact-list span { color: var(--accent); }
+.contact-list a { color: var(--ink); }
+.button { background: var(--ink); color: #fff; }
+.button:hover { background: var(--accent); }
+
+/* ---------- ONE COLOR THEME: navy + mint green everywhere ---------- */
+.card { border-top-color: var(--soft-line); }
+.card:hover { box-shadow: 5px 5px 0 var(--soft); }
+
+/* ---------- SKILLS: outlined groups with a short write-up ---------- */
+.skills-intro { max-width: 40rem; margin: 0 0 1.5rem; }
+
+.skill-groups { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+
+.skill-group {
+  flex: 1 1 14rem;
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  padding: 1.1rem 1.2rem 1.3rem;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.skill-group:hover { border-color: var(--accent); transform: translateY(-3px); }
+
+.skill-group .num { font: 800 2.4rem/1 var(--head); color: var(--soft-line); }
+.skill-group h3 { margin: 0.4rem 0 0.2rem; }
+.skill-group .desc { font-size: 0.9rem; color: var(--muted); margin: 0 0 0.9rem; }
+.skill-group ul { list-style: none; margin: 0; padding: 0; }
+
+.skill-group li {
+  padding: 0.45rem 0;
+  border-top: 1px dashed var(--soft-line);
+  font: 600 1rem var(--head);
+}
+
+.skill-group li::before { content: "→ "; color: var(--accent); }
+
+/* ---------- NO COLOR FILLS: boxes are outlined only ---------- */
+h2, #contact h2 { background: none; border-bottom: 4px solid var(--soft-line); }
+
+.glance, #contact {
+  background: transparent;
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-top: 6px solid var(--soft-line);
+}
+.glance h3, .glance dt { color: var(--accent); }
+
+.flip-front {
+  background: transparent;
+  border: 2px solid var(--ink);
+  border-top: 6px solid var(--soft-line);
+}
+.flip-now .flip-front { border-style: dashed; border-top-style: solid; }
+.flip-back { background: #fff; }
+
+.contact-list li { background: transparent; border: 1px solid var(--ink); border-left: 4px solid var(--accent); }
+
+/* ---------- EXTRA CSS TOUCHES ---------- */
+
+/* faint dotted grid on the page background, like graph paper */
+body {
+  background-image: radial-gradient(rgba(20, 87, 63, 0.14) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* text color when you select text */
+::selection { background: var(--soft); color: var(--ink); }
+
+/* keyboard focus outline, so links are easy to see */
+a:focus-visible, .flip:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+/* section numbers made with CSS counters: 01, 02, 03... */
+main { counter-reset: sec; }
+section h2::before {
+  counter-increment: sec;
+  content: counter(sec, decimal-leading-zero);
+  margin-right: 0.7rem;
+  font: 600 0.8rem var(--head);
+  color: var(--accent);
+  vertical-align: middle;
+}
+
+/* wavy underline under the surname */
+#top h1 span {
+  text-decoration: underline wavy var(--soft-line);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 8px;
+}
+
+/* nav links: underline grows from the left on hover */
+.nav-links a { position: relative; padding-bottom: 2px; }
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: var(--soft-line);
+  transition: width 0.25s;
+}
+.nav-links a:hover::after { width: 100%; }
+
+.flip { cursor: pointer; }
+
+/* floating back-to-top button (position: fixed) */
+.to-top {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 20;
+  width: 2.8rem;
+  height: 2.8rem;
+  display: grid;
+  place-items: center;
+  background: var(--ink);
+  color: #fff;
+  border-radius: 50%;
+  font: 700 1.2rem var(--head);
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+}
+.to-top:hover { background: var(--accent); transform: translateY(-3px); }
+
+/* footer */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 2.5rem;
+  border-top: 2px dashed var(--soft-line);
+  font: 400 0.9rem var(--head);
+}
+.footer p { margin: 0; }
+.footer a { color: var(--accent); }
+
+/* sections fade up once when the page loads */
+@media (prefers-reduced-motion: no-preference) {
+  section { animation: fadeUp 0.7s ease-out both; }
+  section:nth-of-type(2) { animation-delay: 0.1s; }
+  section:nth-of-type(3) { animation-delay: 0.2s; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: none; }
+  }
+}
+
+/* ---------- MORE CREATIVE TOUCHES ---------- */
+
+/* badge with a pulsing dot */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 1.25rem;
+  padding: 0.3rem 1rem;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  font: 600 0.85rem var(--head);
+}
+.badge .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--route); }
+
+/* scrolling strip */
+.ticker {
+  overflow: hidden;
+  margin: 2.5rem 0 0;
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  white-space: nowrap;
+}
+.ticker-track { display: inline-flex; padding: 0.7rem 0; }
+.ticker-track span { padding-right: 2.4rem; font: 700 1rem var(--head); }
+.ticker-track span::after { content: "\2022"; padding-left: 2.4rem; color: var(--route); }
+
+/* reading progress bar (works in browsers that support scroll timelines) */
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 30;
+  width: 100%;
+  height: 4px;
+  background: var(--soft-line);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .badge .dot { animation: beat 1.8s infinite; }
+  @keyframes beat {
+    0% { box-shadow: 0 0 0 0 rgba(20, 87, 63, 0.5); }
+    100% { box-shadow: 0 0 0 10px rgba(20, 87, 63, 0); }
+  }
+  .ticker-track { animation: slide 28s linear infinite; }
+  @keyframes slide { to { transform: translateX(-50%); } }
+}
+
+@supports (animation-timeline: scroll()) {
+  .progress { animation: fill linear both; animation-timeline: scroll(root); }
+  @keyframes fill { to { transform: scaleX(1); } }
+}
+
+/* ---------- MAX CREATIVE LAYER ---------- */
+
+/* animated chart in the header */
+#top { position: relative; }
+.chart { position: absolute; top: 1rem; right: 0; width: 13rem; color: var(--ink); }
+.chart .axis { stroke: var(--ink); stroke-width: 2; }
+.chart .bar { fill: none; stroke: var(--ink); stroke-width: 2; transform-box: fill-box; transform-origin: bottom; }
+.chart .trend { fill: none; stroke: var(--route); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 260; stroke-dashoffset: 0; }
+.chart .end { fill: var(--route); }
+@media (max-width: 640px) { .chart { display: none; } }
+
+/* name: letters spread out a little on hover */
+#top h1 span { transition: letter-spacing 0.4s; }
+#top h1:hover span { letter-spacing: 0.04em; }
+
+/* stamp on each experience card (made with ::after) */
+.card { position: relative; }
+.card h3 { padding-right: 6rem; }
+.card::after {
+  content: "EXPERIENCE";
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  padding: 0.1rem 0.5rem;
+  border: 2px solid var(--accent);
+  border-radius: 4px;
+  color: var(--accent);
+  font: 700 0.65rem var(--head);
+  letter-spacing: 0.12em;
+  transform: rotate(5deg);
+}
+.card:nth-child(n+2)::after { content: "PROJECT"; }
+
+/* small flip hint on the education fronts */
+.flip-front::after {
+  content: "flip";
+  position: absolute;
+  right: 0.9rem;
+  bottom: 0.7rem;
+  font: 600 0.75rem var(--head);
+  color: var(--accent);
+}
+
+/* skill arrows slide on hover */
+.skill-group li::before { display: inline-block; transition: transform 0.2s; }
+.skill-group li:hover::before { transform: translateX(5px); }
+
+/* button arrow */
+.button::after { content: " \2192"; display: inline-block; transition: transform 0.2s; }
+.button:hover::after { transform: translateX(5px); }
+
+/* thin colored scrollbar */
+html { scrollbar-color: var(--soft-line) var(--paper); scrollbar-width: thin; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .chart .bar { animation: grow 0.8s ease-out both; }
+  .chart .bar:nth-of-type(1) { animation-delay: 0.1s; }
+  .chart .bar:nth-of-type(2) { animation-delay: 0.25s; }
+  .chart .bar:nth-of-type(3) { animation-delay: 0.4s; }
+  .chart .bar:nth-of-type(4) { animation-delay: 0.55s; }
+  .chart .bar:nth-of-type(5) { animation-delay: 0.7s; }
+  .chart .bar:nth-of-type(6) { animation-delay: 0.85s; }
+  @keyframes grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
+  .chart .trend { animation: draw 1.6s ease-out 1.2s both; }
+  @keyframes draw { from { stroke-dashoffset: 260; } to { stroke-dashoffset: 0; } }
+
+  .chart .end { animation: pop 0.5s ease-out 2.7s both; transform-box: fill-box; transform-origin: center; }
+  @keyframes pop { from { transform: scale(0); } to { transform: scale(1); } }
+}
+
+/* sections slide in as you scroll to them (browsers that support scroll timelines) */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    section {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+    @keyframes reveal {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: none; }
+    }
+  }
+}
+
+/* ---------- EVEN MORE CREATIVE (no new colors) ---------- */
+
+/* rotating role line: a window that shows one word at a time */
+.rotator { margin: 0 0 1rem; font: 600 1.15rem var(--head); }
+.words {
+  display: inline-block;
+  height: 1.7em;
+  overflow: hidden;
+  vertical-align: bottom;
+  border-bottom: 2px dashed var(--soft-line);
+}
+.words-track { display: block; }
+.words-track span { display: block; height: 1.7em; line-height: 1.7em; color: var(--route); }
+
+/* hover one card or skill group and the others fade back */
+.cards:has(.card:hover) .card:not(:hover),
+.skill-groups:has(.skill-group:hover) .skill-group:not(:hover),
+.flip-grid:has(.flip:hover) .flip:not(:hover) {
+  opacity: 0.45;
+}
+.card, .skill-group, .flip { transition: opacity 0.25s, transform 0.2s, box-shadow 0.2s, border-color 0.2s; }
+
+/* the strips pause when you hover on them */
+.ticker:hover .ticker-track { animation-play-state: paused; }
+
+/* big outlined strip: letters are only an outline */
+.outline-strip { margin: 3rem 0 0; border-width: 0; background: transparent; }
+.outline-strip .ticker-track span {
+  font: 800 3.2rem/1.2 var(--head);
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--ink);
+}
+.outline-strip .ticker-track span::after { -webkit-text-fill-color: var(--route); -webkit-text-stroke: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .words-track { animation: roll 12s infinite; }
+  @keyframes roll {
+    0%, 20% { transform: translateY(0); }
+    25%, 45% { transform: translateY(-1.7em); }
+    50%, 70% { transform: translateY(-3.4em); }
+    75%, 95% { transform: translateY(-5.1em); }
+    100% { transform: translateY(-6.8em); }
+  }
+  .ticker-track.reverse { animation: slide-back 32s linear infinite; }
+  @keyframes slide-back { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+}
+
+/* ---------- FIX: four education cards fit in one row ---------- */
+.flip { flex: 1 1 9.5rem; height: 16rem; }
+.flip-back { font-size: 0.85rem; padding: 0.9rem; }
+.flip-front .title { font-size: 1.35rem; }
+
+/* ---------- 9. PRINT (for saving as PDF) ---------- */
+@media print {
+  .navbar, .to-top, .progress, .ticker, .chart { display: none; }
+  body { background: #fff; font-size: 11pt; }
+  .tags li { transform: none !important; }
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- reading progress bar at the very top -->
+  <div class="progress"></div>
+
+  <!-- Navigation bar (styled with flexbox in style.css) -->
+  <nav class="navbar">
+    <a href="#top" class="logo">Piyush Makhija</a>
+    <ul class="nav-links">
+      <li><a href="#summary">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <!-- Header: id="top" is styled with an ID selector -->
+    <header id="top">
+      <!-- animated growth chart (SVG): bars grow, then the line draws itself -->
+      <svg class="chart" viewBox="0 0 220 140" aria-hidden="true">
+        <line class="axis" x1="10" y1="120" x2="215" y2="120"/>
+        <rect class="bar" x="20" y="90" width="20" height="30"/>
+        <rect class="bar" x="52" y="75" width="20" height="45"/>
+        <rect class="bar" x="84" y="80" width="20" height="40"/>
+        <rect class="bar" x="116" y="55" width="20" height="65"/>
+        <rect class="bar" x="148" y="40" width="20" height="80"/>
+        <rect class="bar" x="180" y="15" width="20" height="105"/>
+        <polyline class="trend" points="30,90 62,75 94,80 126,55 158,40 190,15"/>
+        <circle class="end" cx="190" cy="15" r="5"/>
+      </svg>
+      <h1>Piyush<span>Makhija</span></h1>
+      <p class="tagline">Finance and business student | CFA Level 1 candidate</p>
+      <p class="rotator">I am a
+        <span class="words"><span class="words-track">
+          <span>finance student</span>
+          <span>Excel model builder</span>
+          <span>CFA Level 1 candidate</span>
+          <span>team player</span>
+          <span>finance student</span>
+        </span></span>
+      </p>
+      <p class="badge"><span class="dot"></span>Preparing for CFA Level 1</p>
+    </header>
+
+    <!-- scrolling strip of keywords (the list is repeated so the loop has no gap) -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>Financial modelling</span><span>DCF valuation</span><span>Three-statement modelling</span><span>Excel</span><span>Financial statement analysis</span><span>Teamwork</span>
+        <span>Financial modelling</span><span>DCF valuation</span><span>Three-statement modelling</span><span>Excel</span><span>Financial statement analysis</span><span>Teamwork</span>
+      </div>
+    </div>
+
+    <section id="summary">
+      <h2>About me</h2>
+      <div class="about">
+        <div class="about-text">
+          <p class="summary">I'm a finance student pursuing a dual degree in B.Com and BBA (DBE), and I'm currently preparing for the CFA Level 1 exam. I'm interested in how businesses use numbers to make decisions.</p>
+          <p>In my coursework I've built DCF valuation and three-statement financial models in Excel. Building them showed me how a single assumption flows through a company's financial statements and changes its value. I rely on analytical thinking and problem solving to work through each model step by step.</p>
+          <p>Outside the classroom, I've helped in my family's wires and cables business and brought in a few new clients. It gave me a first-hand view of how a business finds and works with its customers.</p>
+          <p>I'm now looking for my first role in finance, where I can apply my modelling skills, keep learning and grow.</p>
+        </div>
+        <aside class="glance">
+          <h3>At a glance</h3>
+          <dl>
+            <dt>Studying</dt>
+            <dd>B.Com and BBA (DBE), dual degree</dd>
+            <dt>Preparing for</dt>
+            <dd>CFA Level 1</dd>
+            <dt>Strong at</dt>
+            <dd>Excel and financial modelling</dd>
+            <dt>Looking for</dt>
+            <dd>A first role in finance</dd>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <section id="experience">
+      <h2>Work experience</h2>
+      <!-- Each project is a "card" -->
+      <div class="cards">
+        <article class="card">
+          <h3>Helped in the family business</h3>
+          <p class="label">Experience | Family business, wires and cables</p>
+          <ul>
+            <li>Helped in my family's wires and cables business.</li>
+            <li>Brought in a few new clients through referrals from existing clients.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Project: DCF valuation of Dabur</h3>
+          <p class="label">Academic project | Excel</p>
+          <ul>
+            <li>Built a discounted cash flow (DCF) model in Excel to value Dabur.</li>
+            <li>Concluded that Dabur was slightly overvalued.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Project: Three-statement model of HUL</h3>
+          <p class="label">Academic project | Excel</p>
+          <ul>
+            <li>Built a three-statement model (income statement, balance sheet and cash flow) for Hindustan Unilever (HUL).</li>
+            <li>Forecast five years ahead, so changing one assumption updates all three statements.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2>Skills</h2>
+      <p class="skills-intro">Most of what I know comes from building financial models in Excel for my projects. Finance gives me the understanding, Excel is where I build it, and analytical thinking, problem solving and teamwork help me get it right.</p>
+      <div class="skill-groups">
+        <div class="skill-group">
+          <span class="num">01</span>
+          <h3>Finance</h3>
+          <p class="desc">What I have learned and built in my projects.</p>
+          <ul>
+            <li>Financial modelling</li>
+            <li>DCF valuation</li>
+            <li>Three-statement modelling</li>
+            <li>Financial statement analysis</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <span class="num">02</span>
+          <h3>Tools</h3>
+          <p class="desc">Where I build my models and present my work.</p>
+          <ul>
+            <li>Excel</li>
+            <li>Google Sheets</li>
+            <li>PowerPoint</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <span class="num">03</span>
+          <h3>Thinking and working</h3>
+          <p class="desc">How I approach problems and work with others.</p>
+          <ul>
+            <li>Analytical thinking</li>
+            <li>Problem solving</li>
+            <li>Teamwork</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <h2>Education</h2>
+      <p class="hint">Hover over a card, or tap it, to flip it.</p>
+      <!-- Flip cards: front shows the basics, back shows more details -->
+      <div class="flip-grid">
+        <div class="flip" tabindex="0">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <p class="when">Schooling</p>
+              <h3 class="title">Class X</h3>
+              <p class="school">Delhi Public School, Raipur</p>
+              <span class="pill">72%</span>
+            </div>
+            <div class="flip-back">
+              <p><strong>Class X</strong></p>
+              <p>Delhi Public School, Raipur</p>
+              <p>Score: 72%</p>
+              <p>Board: CBSE</p>
+            </div>
+          </div>
+        </div>
+        <div class="flip" tabindex="0">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <p class="when">Schooling</p>
+              <h3 class="title">Class XII</h3>
+              <p class="school">Delhi Public School, Raipur</p>
+              <span class="pill">85%</span>
+            </div>
+            <div class="flip-back">
+              <p><strong>Class XII</strong></p>
+              <p>Delhi Public School, Raipur</p>
+              <p>Score: 85%</p>
+              <p>Stream: Commerce</p>
+            </div>
+          </div>
+        </div>
+        <div class="flip" tabindex="0">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <p class="when">2025 – 2029</p>
+              <h3 class="title">Dual degree</h3>
+              <p class="school">B.Com, ITM University, Raipur</p>
+              <p class="school">BBA (DBE), IIMB</p>
+            </div>
+            <div class="flip-back">
+              <p><strong>B.Com</strong><br>ITM University, Raipur<br>2025 – 2028</p>
+              <p><strong>BBA (DBE)</strong><br>Indian Institute of Management Bangalore (IIMB)<br>2026 – 2029</p>
+            </div>
+          </div>
+        </div>
+        <div class="flip flip-now" tabindex="0">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <p class="when">In progress</p>
+              <h3 class="title">CFA Level 1</h3>
+              <p class="school">CFA Institute</p>
+            </div>
+            <div class="flip-back">
+              <p><strong>CFA Level 1</strong></p>
+              <p>CFA Institute</p>
+              <p>Currently preparing for the exam. Covers ethics, financial reporting, equity, fixed income and portfolio management.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- big outlined text strip, moving the opposite way -->
+    <div class="ticker outline-strip" aria-hidden="true">
+      <div class="ticker-track reverse">
+        <span>Let’s talk</span><span>Let’s talk</span><span>Let’s talk</span><span>Let’s talk</span><span>Let’s talk</span><span>Let’s talk</span>
+        <span>Let’s talk</span><span>Let’s talk</span><span>Let’s talk</span><span>Let’s talk</span><span>Let’s talk</span><span>Let’s talk</span>
+      </div>
+    </div>
+
+    <section id="contact">
+      <h2>Contact me</h2>
+      <p>I'm open to internships and entry-level finance roles. Feel free to reach out.</p>
+      <ul class="contact-list">
+        <li><span>Email</span><a href="mailto:piyushmakhija568@gmail.com">piyushmakhija568@gmail.com</a></li>
+        <li><span>Phone</span>7772828500</li>
+        <li><span>Location</span>Raipur</li>
+      </ul>
+      <a class="button" href="mailto:piyushmakhija568@gmail.com">Send me an email</a>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>Piyush Makhija | Resume website</p>
+    <a href="#top">Back to top ↑</a>
+  </footer>
+
+  <!-- floating button, fixed in the corner -->
+  <a href="#top" class="to-top" aria-label="Back to top">↑</a>
+</body>
+</html>
